@@ -1,0 +1,63 @@
+/* App.css */
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5; /* Light grey background for the whole app */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.app-container {
+  text-align: center;
+  background-color: #e0ffe0; /* Light lime background */
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.counter {
+  font-size: 4rem; /* Largest size for the counter number */
+  font-weight: bold;
+  color: black; /* Black color for the counter number */
+  margin: 20px 0;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+button {
+  font-size: 1.5rem;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  background-color: #90ee90; /* Light green button background */
+  color: #000;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #32cd32; /* Darker green on hover */
+}
+
+.top-bar, .bottom-bar {
+  background-color: #4682b4; /* Soothing blue color */
+  padding: 10px;
+  color: white;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.top-bar {
+  margin-bottom: 20px;
+}
+
+.bottom-bar {
+  margin-top: 20px;
+}

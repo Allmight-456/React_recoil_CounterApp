@@ -1,50 +1,45 @@
-import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
-import "./App.css";
-import { Dashboard } from "./components/Dashboard";
-import { Landing } from "./components/Landing";
+import React, { useContext, useState } from "react";
+import { CountContext } from "../context";
+import './App.css'; // Importing the CSS file
+import './index.css'
 
 function App() {
-  
+  const [count, setCount] = useState(0);
+
   return (
-    
-    <div>
-      <div>
-    
-        {/*one of the ways , it reloads the page to given html */}
-        {/* <button onClick={()=>{
-          window.location.href ='/dashboard';
-        }}>
-          Dashboard
-        </button>
-        <button onClick={()=>{
-          window.location.href ='/';
-        }}>
-          Landing Page
-        </button>*/}
-        
-      </div>
-      <BrowserRouter>
-      <AppBar/>
-      <Routes>
-        <Route path="/dashboard" Component={Dashboard} />
-        <Route path="/" Component={Landing} />
-      </Routes>
-    </BrowserRouter>
+    <div className="app-container">
+      <div className="top-bar">Counter App</div>
+      <CountContext.Provider value={count}>
+        <Count setCount={setCount} />
+      </CountContext.Provider>
+      <div className="bottom-bar"> Count</div>
     </div>
   );
 }
-//we cannot use 'useNavigate' hook in any place except inside 
-// {BrowserRouter} and thats how we solve the page reload
-function AppBar(){
-  const navigate = useNavigate();
-  return <div>
-    <button onClick={()=>{
-          navigate("/")
-        }}>Landing Page</button>
-        <button onClick={()=>{
-          navigate("/dashboard")
-        }}>Dashboard</button>
-  </div>
+
+function Count({ setCount }) {
+  return (
+    <div>
+      <CountRenderer />
+      <Buttons setCount={setCount} />
+    </div>
+  );
+}
+
+function CountRenderer() {
+  const count = useContext(CountContext);
+
+  return <div className="counter">{count}</div>;
+}
+
+function Buttons({ setCount }) {
+  const count = useContext(CountContext);
+  return (
+    <div className="buttons-container">
+      <button onClick={() => setCount(count + 1)}>Increase</button>
+      <button onClick={() => setCount(count - 1)}>Decrease</button>
+    </div>
+  );
 }
 
 export default App;
