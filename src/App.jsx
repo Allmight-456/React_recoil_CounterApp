@@ -1,7 +1,7 @@
 import React from "react";
 import './App.css'; // Importing the CSS file
 import './index.css'
-import { RecoilRoot, useRecoilState, useRecoilValue } from "recoil";
+import { RecoilRoot, useRecoilState, useRecoilValue,useSetRecoilState } from "recoil";
 import { countAtom } from "./store/atoms/count";
 
 function App() {
@@ -11,8 +11,9 @@ function App() {
       <div className="top-bar">Counter App</div>
         <RecoilRoot>
           <Count  />
+          <div className="bottom-bar"> <EvenOddCountRenderer /></div>
         </RecoilRoot>
-      <div className="bottom-bar"> Count</div>
+      
     </div>
   );
 }
@@ -32,12 +33,40 @@ function CountRenderer() {
   return <div className="counter">{count}</div>;
 }
 
+function EvenOddCountRenderer(){
+  const count =useRecoilValue(countAtom);
+  return <div>
+    {(count % 2 == 0) ? "Even" : "Odd"}
+  </div>
+}
+
+//  ? means then , : means else 
+/*
+function EvenOddCountRenderer(){
+  const count = useRecoilValue(countAtom);
+  if(count % 2 == 0){
+    return <div>Even</div>
+  }
+  return <div>
+    Odd
+  </div>
+}
+*/
+
 function Buttons() {
-  const [count,setCount ]= useRecoilState(countAtom);
+  //const [count,setCount ]= useRecoilState(countAtom);    -this needs to keep track of count 
+  const setCount = useSetRecoilState(countAtom);
+  console.log("re-rendered buttons")
+
+  //setCount(count + 1)              -not a functions , buttons rerender on click
+  //setCount(count => count + 1)     - an arrow function
+  //setCount(function(count){ return count +1})
+  
+
   return (
     <div className="buttons-container">
-      <button onClick={() => setCount(count + 1)}>Increase</button>
-      <button onClick={() => setCount(count - 1)}>Decrease</button>
+      <button onClick={() => setCount(count => count + 1)}>Increase</button>
+      <button onClick={() => setCount(count => count - 1)}>Decrease</button>
     </div>
   );
 }
