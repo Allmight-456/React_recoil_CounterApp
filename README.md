@@ -12,7 +12,7 @@ A simple React counter application that demonstrates the use of Recoil for state
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/counter-app.git
+   git clone https://github.com/Allmight-456/counter-app.git
 
 
 
